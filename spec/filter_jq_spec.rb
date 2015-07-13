@@ -45,7 +45,7 @@ describe Fluent::JqFilter do
 
   context '.[]' do
     it do
-      is_expected.to eq [
+      is_expected.to match_array [
         ["test.default", time, {"."=>"baz"}],
         ["test.default", time, {"."=>"bar"}],
         ["test.default", time, {"."=>"baz"}],
@@ -58,7 +58,7 @@ describe Fluent::JqFilter do
     let(:fluentd_conf) { {no_hash_root_key: 'root'} }
 
     it do
-      is_expected.to eq [
+      is_expected.to match_array [
         ["test.default", time, {"root"=>"baz"}],
         ["test.default", time, {"root"=>"bar"}],
         ["test.default", time, {"root"=>"baz"}],
