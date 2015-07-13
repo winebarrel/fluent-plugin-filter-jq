@@ -27,7 +27,7 @@ Or install it yourself as:
 <filter>
   type record_map
   # see http://stedolan.github.io/jq/manual/
-  jq '{foo: .bar}''
+  jq '{foo: .bar}'
 </filter>
 ```
 
