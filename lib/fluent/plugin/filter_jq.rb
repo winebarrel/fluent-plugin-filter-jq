@@ -13,7 +13,7 @@ module Fluent
       result_es = Fluent::MultiEventStream.new
 
       es.each do |time, record|
-        jq(time, record, result_es)
+        jq_search(time, record, result_es)
       end
 
       result_es
@@ -24,7 +24,7 @@ module Fluent
 
     private
 
-    def jq(time, record, result_es)
+    def jq_search(time, record, result_es)
       json = MultiJson.dump(record)
 
       JQ(json).search(@jq) do |value|
