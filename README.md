@@ -28,6 +28,7 @@ Or install it yourself as:
   type record_map
   # see http://stedolan.github.io/jq/manual/
   jq '{foo: .bar}'
+  # no_hash_root_key .
 </filter>
 ```
 
