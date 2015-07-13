@@ -2,6 +2,8 @@
 
 Filter Plugin to create a new record containing the values converted by [jq](http://stedolan.github.io/jq/).
 
+It is requires [ruby-jq](https://github.com/winebarrel/ruby-jq). see [ruby-jq#Installation](https://github.com/winebarrel/ruby-jq#installation)
+
 [![Gem Version](https://badge.fury.io/rb/fluent-plugin-filter-jq.svg)](http://badge.fury.io/rb/fluent-plugin-filter-jq)
 [![Build Status](https://travis-ci.org/winebarrel/fluent-plugin-filter-jq.svg?branch=master)](https://travis-ci.org/winebarrel/fluent-plugin-filter-jq)
 
