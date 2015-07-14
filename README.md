@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ```apache
 <filter>
-  type record_map
+  type jq
   # see http://stedolan.github.io/jq/manual/
   jq '{foo: .bar}'
   # no_hash_root_key .
