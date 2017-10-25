@@ -1,7 +1,9 @@
 language: ruby
 rvm:
-- 2.0.0
-- 2.1.5
+- 2.1
+- 2.2
+- 2.3.5
+- 2.4.2
 install:
 - wget http://ftp.gnu.org/gnu/bison/bison-3.0.2.tar.gz
 - tar xf bison-3.0.2.tar.gz
