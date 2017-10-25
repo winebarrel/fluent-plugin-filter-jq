@@ -1,4 +1,4 @@
-describe 'Fluent::JqFilter#configure' do
+describe 'Fluent::Plugin::JqFilter#configure' do
   subject do |example|
     param = example.full_description.split(/\s+/)[1]
     create_driver(fluentd_conf).instance.send(param)
@@ -17,8 +17,8 @@ describe 'Fluent::JqFilter#configure' do
   end
 
   describe 'jq' do
-    context '{new_foo:.foo}' do
-      it { is_expected.to eq '{new_foo:.foo}' }
+    context '{new_foo: .foo}' do
+      it { is_expected.to eq "{new_foo: .foo}" }
     end
   end
 
