@@ -29,3 +29,6 @@ no_hash_root_key #{options[:no_hash_root_key]}
 
   Fluent::Test::Driver::Filter.new(Fluent::Plugin::JqFilter).configure(fluentd_conf)
 end
+
+# prevent Test::Unit's AutoRunner from executing during RSpec's rake task
+Test::Unit.run = true if defined?(Test::Unit) && Test::Unit.respond_to?(:run=)
