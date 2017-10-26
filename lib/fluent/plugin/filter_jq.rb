@@ -1,10 +1,11 @@
 require 'fluent_plugin_filter_jq/version'
+require 'fluent/plugin/filter'
 require 'multi_json'
 require 'jq'
 
-module Fluent
+module Fluent::Plugin
   class JqFilter < Filter
-    Plugin.register_filter('jq', self)
+    Fluent::Plugin.register_filter('jq', self)
 
     config_param :jq, :string
     config_param :no_hash_root_key, :string, :default => '.'

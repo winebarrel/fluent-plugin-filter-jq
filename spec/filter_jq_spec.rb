@@ -1,6 +1,8 @@
 
-describe Fluent::JqFilter do
-  let(:time) { Time.parse('2015/05/24 18:30 UTC').to_i }
+describe Fluent::Plugin::JqFilter do
+  include Fluent::Test::Helpers
+
+  let(:time) { event_time('2015/05/24 18:30 UTC') }
   let(:fluentd_conf) { {} }
 
   let(:driver) do |example|
@@ -16,20 +18,20 @@ describe Fluent::JqFilter do
   end
 
   before do
-    records.each do |record|
-      driver.emit(record, time)
+    driver.run(default_tag: 'test.default') do
+      records.each do |record|
+        driver.feed(time, record)
+      end
     end
-
-    driver.run
   end
 
-  subject { driver.emits }
+  subject { driver.filtered }
 
   context '.' do
     it do
       is_expected.to eq [
-        ["test.default", time, {"foo"=>"bar", "zoo"=>"baz"}],
-        ["test.default", time, {"foo"=>"zoo", "bar"=>"baz"}]
+        [time, {"foo"=>"bar", "zoo"=>"baz"}],
+        [time, {"foo"=>"zoo", "bar"=>"baz"}]
       ]
     end
   end
@@ -37,8 +39,8 @@ describe Fluent::JqFilter do
   context '{new_foo:.foo}' do
     it do
       is_expected.to eq [
-        ["test.default", time, {"new_foo"=>"bar"}],
-        ["test.default", time, {"new_foo"=>"zoo"}]
+        [time, {"new_foo"=>"bar"}],
+        [time, {"new_foo"=>"zoo"}]
       ]
     end
   end
@@ -46,10 +48,10 @@ describe Fluent::JqFilter do
   context '.[]' do
     it do
       is_expected.to match_array [
-        ["test.default", time, {"."=>"baz"}],
-        ["test.default", time, {"."=>"bar"}],
-        ["test.default", time, {"."=>"baz"}],
-        ["test.default", time, {"."=>"zoo"}]
+        [time, {"."=>"baz"}],
+        [time, {"."=>"bar"}],
+        [time, {"."=>"baz"}],
+        [time, {"."=>"zoo"}]
       ]
     end
   end
@@ -59,10 +61,10 @@ describe Fluent::JqFilter do
 
     it do
       is_expected.to match_array [
-        ["test.default", time, {"root"=>"baz"}],
-        ["test.default", time, {"root"=>"bar"}],
-        ["test.default", time, {"root"=>"baz"}],
-        ["test.default", time, {"root"=>"zoo"}]
+        [time, {"root"=>"baz"}],
+        [time, {"root"=>"bar"}],
+        [time, {"root"=>"baz"}],
+        [time, {"root"=>"zoo"}]
       ]
     end
   end
